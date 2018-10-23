@@ -1,4 +1,4 @@
-## 0.1.1 [unreleased]
+## 0.1.1
 
 - Fixed issue with not loading history on Heroku
 
