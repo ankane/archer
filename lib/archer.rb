@@ -30,7 +30,7 @@ module Archer
       quietly do
         history = Archer::History.find_by(user: user)
       end
-    rescue
+    rescue ActiveRecord::StatementInvalid
       warn "[archer] Create table to enable history"
     end
 
@@ -45,7 +45,7 @@ module Archer
       history.commands = Readline::HISTORY.to_a.last(limit).join("\n")
       history.save
     end
-  rescue
+  rescue ActiveRecord::StatementInvalid
     warn "[archer] Unable to save history"
   end
 
