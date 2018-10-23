@@ -42,7 +42,7 @@ module Archer
   def self.save
     quietly do
       history = Archer::History.where(user: user).first_or_initialize
-      history.commands = Readline::HISTORY.to_a[-limit..-1].join("\n")
+      history.commands = Readline::HISTORY.to_a.last(limit).join("\n")
       history.save
     end
   rescue
