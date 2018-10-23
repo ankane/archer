@@ -20,7 +20,7 @@ module Archer
     quietly do
       Archer::History.where(user: user).delete_all
     end
-    Readline::HISTORY.clear rescue nil
+    Readline::HISTORY.clear
     true
   end
 
@@ -35,18 +35,14 @@ module Archer
     end
 
     if history && history.persisted?
-      File.write(history_file, history.commands)
+      Readline::HISTORY.push(*history.commands.split("\n"))
     end
-
-    require "irb/ext/save-history"
-    IRB.conf[:SAVE_HISTORY] = limit
-    IRB.conf[:HISTORY_FILE] = history_file
   end
 
   def self.save
     quietly do
       history = Archer::History.where(user: user).first_or_initialize
-      history.commands = File.read(history_file)
+      history.commands = Readline::HISTORY.to_a[-limit..-1].join("\n")
       history.save
     end
   rescue
