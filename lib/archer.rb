@@ -28,13 +28,13 @@ module Archer
     history = nil
     begin
       quietly do
-        history = Archer::History.where(user: user).first_or_initialize
+        history = Archer::History.find_by(user: user)
       end
     rescue
       warn "[archer] Create table to enable history"
     end
 
-    if history && history.persisted?
+    if history
       Readline::HISTORY.push(*history.commands.split("\n"))
     end
   end
@@ -46,7 +46,7 @@ module Archer
       history.save
     end
   rescue
-    # do nothing
+    warn "[archer] Unable to save history"
   end
 
   # private
