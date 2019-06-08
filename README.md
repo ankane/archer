@@ -59,6 +59,8 @@ Clear history for current user with:
 Archer.clear
 ```
 
+You should do this after running sensitive commands.
+
 ## Configuration
 
 Change the number of commands to remember
