@@ -11,13 +11,7 @@ module Archer
       end
 
       def migration_version
-        if rails5?
-          "[#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}]"
-        end
-      end
-
-      def rails5?
-        Rails::VERSION::MAJOR >= 5
+        "[#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}]"
       end
     end
   end
