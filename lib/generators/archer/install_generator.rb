@@ -11,7 +11,7 @@ module Archer
       end
 
       def migration_version
-        "[#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}]"
+        ActiveRecord::Migration.current_version
       end
     end
   end
