@@ -20,7 +20,8 @@ module Archer
     quietly do
       Archer::History.where(user: user).delete_all
     end
-    Readline::HISTORY.clear
+    Readline::HISTORY.clear if defined?(Readline)
+    Reline::HISTORY.clear if defined?(Reline)
     true
   end
 
