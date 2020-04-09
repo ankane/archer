@@ -35,7 +35,10 @@ module Archer
     end
 
     if history
-      history_object.push(*history.commands.split("\n"))
+      commands = history.commands.split("\n")
+      # can't use reline? yet, so push to all
+      Readline::HISTORY.push(*commands) if defined?(Readline)
+      Reline::HISTORY.push(*commands) if defined?(Reline)
     end
   end
 
