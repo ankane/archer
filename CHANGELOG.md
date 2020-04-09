@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2020-04-09)
 
 - Added support for Reline
 - Dropped support for Rails 4.2
