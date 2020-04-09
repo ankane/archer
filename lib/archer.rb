@@ -47,7 +47,7 @@ module Archer
     quietly do
       history = Archer::History.where(user: user).first_or_initialize
       history.commands = history_object.to_a.last(limit).join("\n")
-      history.save
+      history.save!
     end
   rescue ActiveRecord::StatementInvalid
     warn "[archer] Unable to save history"
