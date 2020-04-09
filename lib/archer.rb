@@ -35,18 +35,30 @@ module Archer
     end
 
     if history
-      Readline::HISTORY.push(*history.commands.split("\n"))
+      history_object.push(*history.commands.split("\n"))
     end
   end
 
   def self.save
     quietly do
       history = Archer::History.where(user: user).first_or_initialize
-      history.commands = Readline::HISTORY.to_a.last(limit).join("\n")
+      history.commands = history_object.to_a.last(limit).join("\n")
       history.save
     end
   rescue ActiveRecord::StatementInvalid
     warn "[archer] Unable to save history"
+  end
+
+  # private
+  def self.history_object
+    reline? ? Reline::HISTORY : Readline::HISTORY
+  end
+
+  # private
+  def self.reline?
+    IRB.CurrentContext.io.is_a?(IRB::ReidlineInputMethod)
+  rescue
+    false
   end
 
   # private

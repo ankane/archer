@@ -1,5 +1,6 @@
 ## 0.2.0 (unreleased)
 
+- Added support for Reline
 - Dropped support for Rails 4.2
 
 ## 0.1.1 (2018-10-23)
