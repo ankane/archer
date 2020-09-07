@@ -3,7 +3,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version
     create_table :archer_history do |t|
       t.string :user
       t.text :commands
-      t.timestamp :updated_at
+      t.datetime :updated_at
     end
 
     add_index :archer_history, :user, unique: true
