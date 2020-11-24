@@ -3,6 +3,7 @@ require "active_support/core_ext/module/attribute_accessors"
 
 # modules
 require "archer/engine" if defined?(Rails)
+require "archer/irb"
 require "archer/version"
 
 module Archer
@@ -14,6 +15,7 @@ module Archer
   mattr_accessor :user
   self.user = ENV["USER"]
 
+  # TODO remove in 0.3.0
   mattr_accessor :history_file
 
   def self.clear
@@ -37,9 +39,7 @@ module Archer
 
     if history
       commands = history.commands.split("\n")
-      # can't use reline? yet, so push to all
-      Readline::HISTORY.push(*commands) if defined?(Readline)
-      Reline::HISTORY.push(*commands) if defined?(Reline)
+      history_object.push(*commands)
     end
   end
 
