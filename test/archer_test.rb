@@ -1,7 +1,8 @@
-require "test_helper"
+require_relative "test_helper"
 
 class ArcherTest < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::Archer::VERSION
+  def test_user
+    Archer.user = "test"
+    assert_equal "test", Archer.user
   end
 end
