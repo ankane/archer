@@ -1,4 +1,4 @@
-## 0.2.1 (unreleased)
+## 0.2.1 (2020-11-23)
 
 - Fixed issue with not loading history
 - Use `datetime` type in migration
