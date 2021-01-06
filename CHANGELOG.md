@@ -1,3 +1,7 @@
+## 0.2.2 (unreleased)
+
+- Fixed issue with Reline detection
+
 ## 0.2.1 (2020-11-23)
 
 - Fixed issue with not loading history
