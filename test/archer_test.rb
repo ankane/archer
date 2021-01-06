@@ -7,6 +7,7 @@ class ArcherTest < Minitest::Test
   end
 
   def test_works
+    # TODO use IRB
     ["1 + 2", "2 * 3"].each do |cmd|
       Archer.history_object.push(cmd)
     end
