@@ -7,8 +7,9 @@ class ArcherTest < Minitest::Test
   end
 
   def test_works
-    Readline::HISTORY.push("1 + 2")
-    Readline::HISTORY.push("2 * 3")
+    ["1 + 2", "2 * 3"].each do |cmd|
+      Archer.history_object.push(cmd)
+    end
     Archer.save
 
     assert_equal 1, Archer::History.count
