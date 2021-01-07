@@ -1,4 +1,4 @@
-## 0.2.2 (2020-01-07)
+## 0.2.2 (2021-01-07)
 
 - Fixed issue with Reline detection
 
