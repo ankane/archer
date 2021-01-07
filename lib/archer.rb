@@ -54,6 +54,7 @@ module Archer
   end
 
   # private
+  # TODO use IRB.CurrentContext.io.class::HISTORY
   def self.history_object
     reline? ? Reline::HISTORY : Readline::HISTORY
   end
