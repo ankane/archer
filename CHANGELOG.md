@@ -1,3 +1,7 @@
+## 0.2.3 (unreleased)
+
+- Added `save_session` option
+
 ## 0.2.2 (2021-01-07)
 
 - Fixed issue with Reline detection

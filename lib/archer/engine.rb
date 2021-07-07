@@ -8,7 +8,7 @@ module Archer
       ::IRB::Irb.prepend(Archer::Irb)
 
       at_exit do
-        Archer.save
+        Archer.save if Archer.save_session
       end
     end
   end

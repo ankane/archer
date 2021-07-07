@@ -15,6 +15,9 @@ module Archer
   mattr_accessor :user
   self.user = ENV["USER"]
 
+  mattr_accessor :save_session
+  self.save_session = true
+
   # TODO remove in 0.3.0
   mattr_accessor :history_file
 
