@@ -1,4 +1,4 @@
-## 0.2.3 (unreleased)
+## 0.2.3 (2021-08-03)
 
 - Added `save_session` option
 

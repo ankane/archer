@@ -53,13 +53,19 @@ Archer.user
 
 ## Clearing History
 
+Disable saving history for the current session with:
+
+```ruby
+Archer.save_session = false
+```
+
+You should do this when running sensitive commands.
+
 Clear history for current user with:
 
 ```ruby
 Archer.clear
 ```
-
-You should do this after running sensitive commands.
 
 ## Configuration
 
