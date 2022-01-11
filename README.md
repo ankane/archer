@@ -11,7 +11,7 @@ Designed for platforms with ephemeral filesystems
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem 'archer-rails'
+gem "archer-rails"
 ```
 
 And run:
@@ -24,7 +24,7 @@ rails db:migrate
 Lastly, update your Gemfile to only include it in environments where you need it:
 
 ```ruby
-gem 'archer-rails', group: [:production]
+gem "archer-rails", group: [:production]
 ```
 
 ## How It Works
