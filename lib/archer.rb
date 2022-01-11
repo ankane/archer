@@ -18,9 +18,6 @@ module Archer
   mattr_accessor :save_session
   self.save_session = true
 
-  # TODO remove in 0.3.0
-  mattr_accessor :history_file
-
   def self.clear
     quietly do
       Archer::History.where(user: user).delete_all
