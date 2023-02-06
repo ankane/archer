@@ -2,9 +2,9 @@
 require "active_support/core_ext/module/attribute_accessors"
 
 # modules
-require "archer/engine" if defined?(Rails)
-require "archer/irb"
-require "archer/version"
+require_relative "archer/engine" if defined?(Rails)
+require_relative "archer/irb"
+require_relative "archer/version"
 
 module Archer
   autoload :History, "archer/history"
