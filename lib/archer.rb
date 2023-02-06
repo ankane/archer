@@ -36,6 +36,7 @@ module Archer
 
       if history
         commands = history.commands.split("\n")
+        history_object.clear
         history_object.push(*commands)
       end
 
