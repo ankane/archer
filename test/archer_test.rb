@@ -42,7 +42,7 @@ class ArcherTest < Minitest::Test
   def run_commands(commands)
     # TODO use IRB
     commands.each do |cmd|
-      Archer.history_object.push(cmd) if Archer.history_object
+      Archer.send(:history_object).push(cmd) if Archer.send(:history_object)
     end
   end
 end

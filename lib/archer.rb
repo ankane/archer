@@ -18,57 +18,59 @@ module Archer
   mattr_accessor :save_session
   self.save_session = true
 
-  def self.clear
-    quietly do
-      Archer::History.where(user: user).delete_all
-    end
-    history_object.clear if history_object
-    true
-  end
+  class << self
+    def start
+      if !history_object
+        warn "[archer] History not enabled"
+        return
+      end
 
-  def self.start
-    if !history_object
-      warn "[archer] History not enabled"
-      return
+      history = nil
+      begin
+        quietly do
+          history = Archer::History.find_by(user: user)
+        end
+      rescue ActiveRecord::StatementInvalid
+        warn "[archer] Create table to enable history"
+      end
+
+      if history
+        commands = history.commands.split("\n")
+        history_object.push(*commands)
+      end
     end
 
-    history = nil
-    begin
+    def save
+      return unless history_object
+
       quietly do
-        history = Archer::History.find_by(user: user)
+        history = Archer::History.where(user: user).first_or_initialize
+        history.commands = history_object.to_a.last(limit).join("\n")
+        history.save!
       end
     rescue ActiveRecord::StatementInvalid
-      warn "[archer] Create table to enable history"
+      warn "[archer] Unable to save history"
     end
 
-    if history
-      commands = history.commands.split("\n")
-      history_object.push(*commands)
+    def clear
+      quietly do
+        Archer::History.where(user: user).delete_all
+      end
+      history_object.clear if history_object
+      true
     end
-  end
 
-  def self.save
-    return unless history_object
+    private
 
-    quietly do
-      history = Archer::History.where(user: user).first_or_initialize
-      history.commands = history_object.to_a.last(limit).join("\n")
-      history.save!
+    def history_object
+      cls = IRB.CurrentContext.io.class
+      cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
     end
-  rescue ActiveRecord::StatementInvalid
-    warn "[archer] Unable to save history"
-  end
 
-  # private
-  def self.history_object
-    cls = IRB.CurrentContext.io.class
-    cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
-  end
-
-  # private
-  def self.quietly
-    ActiveRecord::Base.logger.silence do
-      yield
+    def quietly
+      ActiveRecord::Base.logger.silence do
+        yield
+      end
     end
   end
 end
