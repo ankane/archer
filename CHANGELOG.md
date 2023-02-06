@@ -1,3 +1,7 @@
+## 0.3.1 (unreleased)
+
+- Fixed error with irb 1.4.2+
+
 ## 0.3.0 (2022-01-10)
 
 - Dropped support for Ruby < 2.6 and Rails < 5.2

@@ -61,7 +61,11 @@ module Archer
 
   # private
   def self.reline?
-    IRB.CurrentContext.io.is_a?(IRB::ReidlineInputMethod)
+    if defined?(IRB::RelineInputMethod)
+      IRB.CurrentContext.io.is_a?(IRB::RelineInputMethod)
+    else
+      IRB.CurrentContext.io.is_a?(IRB::ReidlineInputMethod)
+    end
   rescue
     false
   end
