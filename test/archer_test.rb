@@ -10,10 +10,8 @@ class ArcherTest < Minitest::Test
 
     Archer.clear
 
-    # TODO use IRB
-    ["1 + 2", "2 * 3"].each do |cmd|
-      Archer.history_object.push(cmd)
-    end
+    run_commands(["1 + 2", "2 * 3"])
+
     Archer.save
 
     assert_equal 1, Archer::History.count
@@ -27,6 +25,8 @@ class ArcherTest < Minitest::Test
 
     Archer.clear
 
+    run_commands(["1 + 2", "2 * 3"])
+
     Archer.save
 
     assert_equal 0, Archer::History.count
@@ -35,7 +35,14 @@ class ArcherTest < Minitest::Test
   private
 
   def setup_irb
-    $irb = IRB::Irb.new
-    IRB.conf[:MAIN_CONTEXT] = $irb.context
+    @irb = IRB::Irb.new
+    IRB.conf[:MAIN_CONTEXT] = @irb.context
+  end
+
+  def run_commands(commands)
+    # TODO use IRB
+    commands.each do |cmd|
+      Archer.history_object.push(cmd) if Archer.history_object
+    end
   end
 end
