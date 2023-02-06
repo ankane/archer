@@ -10,6 +10,8 @@ class ArcherTest < Minitest::Test
 
     assert_equal true, Archer.clear
 
+    assert_equal 0, Archer::History.count
+
     run_commands(["1 + 2", "2 * 3"])
 
     assert_equal true, Archer.save
@@ -24,6 +26,8 @@ class ArcherTest < Minitest::Test
     STDIN.stub(:tty?, false) { setup_irb }
 
     assert_equal true, Archer.clear
+
+    assert_equal 0, Archer::History.count
 
     run_commands(["1 + 2", "2 * 3"])
 
