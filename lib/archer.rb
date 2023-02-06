@@ -22,8 +22,7 @@ module Archer
     quietly do
       Archer::History.where(user: user).delete_all
     end
-    Readline::HISTORY.clear if defined?(Readline)
-    Reline::HISTORY.clear if defined?(Reline)
+    history_object.clear
     true
   end
 
@@ -54,20 +53,8 @@ module Archer
   end
 
   # private
-  # TODO use IRB.CurrentContext.io.class::HISTORY
   def self.history_object
-    reline? ? Reline::HISTORY : Readline::HISTORY
-  end
-
-  # private
-  def self.reline?
-    if defined?(IRB::RelineInputMethod)
-      IRB.CurrentContext.io.is_a?(IRB::RelineInputMethod)
-    else
-      IRB.CurrentContext.io.is_a?(IRB::ReidlineInputMethod)
-    end
-  rescue
-    false
+    IRB.CurrentContext.io.class::HISTORY
   end
 
   # private
