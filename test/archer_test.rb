@@ -7,9 +7,6 @@ class ArcherTest < Minitest::Test
   end
 
   def test_works
-    # run console hooks
-    Rails::Console.new(Rails.application)
-
     # TODO use IRB
     ["1 + 2", "2 * 3"].each do |cmd|
       Archer.history_object.push(cmd)
