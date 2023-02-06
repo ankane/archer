@@ -9,4 +9,5 @@
 /Gemfile.lock
 /test/internal/log/
 /test/internal/tmp/
+*.lock
 *.sqlite
