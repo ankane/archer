@@ -3,7 +3,6 @@ require "combustion"
 Bundler.require(:default)
 require "minitest/autorun"
 require "minitest/pride"
-require "reline"
 require "rails/command"
 require "rails/commands/console/console_command"
 
@@ -17,8 +16,10 @@ end
 Archer.user = "test"
 
 IRB.setup(nil)
-irb = IRB::Irb.new
-IRB.conf[:MAIN_CONTEXT] = irb.context
+STDIN.stub(:tty?, true) do
+  irb = IRB::Irb.new
+  IRB.conf[:MAIN_CONTEXT] = irb.context
+end
 
 # run console hooks
 Rails::Console.new(Rails.application)
