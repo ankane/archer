@@ -7,3 +7,6 @@
 /spec/reports/
 /tmp/
 /Gemfile.lock
+/test/internal/log/
+/test/internal/tmp/
+*.sqlite
