@@ -38,6 +38,8 @@ module Archer
         commands = history.commands.split("\n")
         history_object.push(*commands)
       end
+
+      IRB.conf[:AT_EXIT].push(proc { Archer.save if Archer.save_session })
     end
 
     def save

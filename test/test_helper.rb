@@ -15,9 +15,6 @@ end
 
 Archer.user = "test"
 
-# prevent error on exit
-Archer.save_session = false
-
 IRB.setup(nil)
 
 # run console hooks
