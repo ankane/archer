@@ -15,11 +15,10 @@ end
 
 Archer.user = "test"
 
+# prevent error on exit
+Archer.save_session = false
+
 IRB.setup(nil)
-STDIN.stub(:tty?, true) do
-  irb = IRB::Irb.new
-  IRB.conf[:MAIN_CONTEXT] = irb.context
-end
 
 # run console hooks
 Rails::Console.new(Rails.application)
