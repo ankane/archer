@@ -44,7 +44,7 @@ module Archer
     end
 
     def save
-      return unless history_object
+      return false unless history_object
 
       quietly do
         history = Archer::History.where(user: user).first_or_initialize
@@ -53,6 +53,7 @@ module Archer
       end
     rescue ActiveRecord::StatementInvalid
       warn "[archer] Unable to save history"
+      false
     end
 
     def clear

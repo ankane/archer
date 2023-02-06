@@ -8,11 +8,11 @@ class ArcherTest < Minitest::Test
   def test_tty
     STDIN.stub(:tty?, true) { setup_irb }
 
-    Archer.clear
+    assert_equal true, Archer.clear
 
     run_commands(["1 + 2", "2 * 3"])
 
-    Archer.save
+    assert_equal true, Archer.save
 
     assert_equal 1, Archer::History.count
     history = Archer::History.last
@@ -23,11 +23,11 @@ class ArcherTest < Minitest::Test
   def test_non_tty
     STDIN.stub(:tty?, false) { setup_irb }
 
-    Archer.clear
+    assert_equal true, Archer.clear
 
     run_commands(["1 + 2", "2 * 3"])
 
-    Archer.save
+    assert_equal false, Archer.save
 
     assert_equal 0, Archer::History.count
   end
