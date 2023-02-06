@@ -1,1 +1,1 @@
-require "archer"
+require_relative "archer"
