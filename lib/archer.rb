@@ -22,11 +22,16 @@ module Archer
     quietly do
       Archer::History.where(user: user).delete_all
     end
-    history_object.clear
+    history_object.clear if history_object
     true
   end
 
   def self.start
+    if !history_object
+      warn "[archer] History not enabled"
+      return
+    end
+
     history = nil
     begin
       quietly do
@@ -43,6 +48,8 @@ module Archer
   end
 
   def self.save
+    return unless history_object
+
     quietly do
       history = Archer::History.where(user: user).first_or_initialize
       history.commands = history_object.to_a.last(limit).join("\n")
@@ -54,7 +61,8 @@ module Archer
 
   # private
   def self.history_object
-    IRB.CurrentContext.io.class::HISTORY
+    cls = IRB.CurrentContext.io.class
+    cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
   end
 
   # private
