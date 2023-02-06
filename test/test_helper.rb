@@ -3,6 +3,7 @@ require "combustion"
 Bundler.require(:default)
 require "minitest/autorun"
 require "minitest/pride"
+require "reline"
 require "rails/command"
 require "rails/commands/console/console_command"
 
