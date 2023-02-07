@@ -6,6 +6,8 @@ require "minitest/pride"
 require "rails/command"
 require "rails/commands/console/console_command"
 
+puts "Testing with IRB #{IRB::VERSION}"
+
 logger = ActiveSupport::Logger.new(ENV["VERBOSE"] ? STDOUT : nil)
 
 Combustion.path = "test/internal"
