@@ -17,7 +17,7 @@ end
 
 Archer.user = "test"
 
-IRB.setup(nil)
+IRB.setup(nil, argv: [])
 
 # run console hooks
 Rails::Console.new(Rails.application)
