@@ -21,7 +21,7 @@ module Archer
   class << self
     def start
       if !history_object
-        warn "[archer] History not enabled"
+        warn "[archer] Skipping history"
         return
       end
 
