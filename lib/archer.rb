@@ -67,8 +67,8 @@ module Archer
     private
 
     def history_object
-      cls = IRB.CurrentContext.io.class
-      cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
+      cls = IRB.CurrentContext&.io&.class
+      cls && cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
     end
 
     def quietly
