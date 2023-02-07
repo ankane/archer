@@ -39,7 +39,9 @@ class ArcherTest < Minitest::Test
   private
 
   def setup_irb
-    @irb = IRB::Irb.new
+    capture_io do
+      @irb = IRB::Irb.new
+    end
     IRB.conf[:MAIN_CONTEXT] = @irb.context
   end
 
