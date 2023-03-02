@@ -18,6 +18,9 @@ module Archer
   mattr_accessor :save_session
   self.save_session = true
 
+  mattr_accessor :exit_callbacks
+  self.exit_callbacks = []
+
   class << self
     def start
       if !history_object
@@ -41,10 +44,18 @@ module Archer
       end
 
       IRB.conf[:AT_EXIT].push(proc { Archer.save if Archer.save_session })
+
+      Archer.exit_callbacks.each do |cb|
+        IRB.conf[:AT_EXIT].push(cb)
+      end
     end
 
     def add_exit_callback fn
-      IRB.conf[:AT_EXIT].push(fn)
+      if IRB.conf[:AT_EXIT].nil?
+        Archer.exit_callbacks.push(fn)
+      else
+        IRB.conf[:AT_EXIT].push(fn)
+      end
     end
 
     def save
