@@ -43,6 +43,10 @@ module Archer
       IRB.conf[:AT_EXIT].push(proc { Archer.save if Archer.save_session })
     end
 
+    def add_exit_callback fn
+      IRB.conf[:AT_EXIT].push(fn)
+    end
+
     def save
       return false unless history_object
 
