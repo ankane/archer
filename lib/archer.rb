@@ -87,9 +87,7 @@ module Archer
     end
 
     def quietly
-      ActiveRecord::Base.logger.silence do
-        yield
-      end
+      yield
     end
   end
 end
