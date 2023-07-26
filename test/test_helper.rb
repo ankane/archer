@@ -5,6 +5,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require "rails/command"
 require "rails/commands/console/console_command"
+require "irb"
 
 puts "Testing with IRB #{IRB::VERSION}"
 
