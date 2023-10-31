@@ -1,3 +1,7 @@
+## 0.4.1 (unreleased)
+
+- Fixed error with Rails 7.1
+
 ## 0.4.0 (2023-02-06)
 
 - Fixed error with irb 1.4.2+
