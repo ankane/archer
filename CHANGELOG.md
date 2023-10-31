@@ -1,4 +1,4 @@
-## 0.4.1 (unreleased)
+## 0.4.1 (2023-10-31)
 
 - Fixed error with Rails 7.1
 
