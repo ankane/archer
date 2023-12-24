@@ -13,6 +13,7 @@ logger = ActiveSupport::Logger.new(ENV["VERBOSE"] ? STDOUT : nil)
 
 Combustion.path = "test/internal"
 Combustion.initialize! :active_record do
+  config.load_defaults Rails::VERSION::STRING.to_f
   config.active_record.logger = logger
 end
 
