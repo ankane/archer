@@ -19,7 +19,7 @@ class ArcherTest < Minitest::Test
     assert_equal 1, Archer::History.count
     history = Archer::History.last
     assert_equal "test", history.user
-    assert_equal '["1 + 2","2 * 3"]', history.commands
+    assert_equal ["1 + 2", "2 * 3"], history.commands
   end
 
   def test_non_tty
