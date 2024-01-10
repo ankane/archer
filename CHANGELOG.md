@@ -1,4 +1,4 @@
-## 0.5.0 (unreleased)
+## 1.0.0 (2024-01-10)
 
 - Added support for multi-line commands
 - Changed command serialization to JSON
