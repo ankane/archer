@@ -1,6 +1,7 @@
 ## 0.5.0 (unreleased)
 
 - Added support for multi-line commands
+- Dropped support for Ruby < 3 and Rails < 6.1
 
 ## 0.4.1 (2023-10-31)
 
