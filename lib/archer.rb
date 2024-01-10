@@ -1,6 +1,9 @@
 # dependencies
 require "active_support/core_ext/module/attribute_accessors"
 
+# stdlib
+require "json"
+
 # modules
 require_relative "archer/engine" if defined?(Rails)
 require_relative "archer/irb"
@@ -35,7 +38,12 @@ module Archer
       end
 
       if history
-        commands = history.commands.split("\n")
+        commands =
+          begin
+            JSON.parse(history.commands, {max_nesting: 1})
+          rescue JSON::ParserError
+            history.commands.split("\n")
+          end
         history_object.clear
         history_object.push(*commands)
       end
@@ -48,7 +56,7 @@ module Archer
 
       quietly do
         history = Archer::History.where(user: user).first_or_initialize
-        history.commands = history_object.to_a.last(limit).join("\n")
+        history.commands = JSON.generate(history_object.to_a.last(limit))
         history.save!
       end
     rescue ActiveRecord::StatementInvalid

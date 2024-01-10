@@ -1,3 +1,7 @@
+## 0.5.0 (unreleased)
+
+- Added support for multi-line commands
+
 ## 0.4.1 (2023-10-31)
 
 - Fixed error with Rails 7.1
