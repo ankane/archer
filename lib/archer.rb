@@ -45,6 +45,9 @@ module Archer
       end
 
       IRB.conf[:AT_EXIT].push(proc { Archer.save if Archer.save_session })
+    rescue
+      # never prevent console from booting
+      warn "[archer] Error loading history"
     end
 
     def save
