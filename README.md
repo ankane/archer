@@ -122,4 +122,5 @@ To get started with development:
 git clone https://github.com/ankane/archer.git
 cd archer
 bundle install
+bundle exec rake test
 ```
