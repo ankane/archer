@@ -6,7 +6,7 @@ Rails console history for Heroku, Docker, and more
 
 Designed for platforms with ephemeral filesystems
 
-[![Build Status](https://github.com/ankane/archer/workflows/build/badge.svg?branch=master)](https://github.com/ankane/archer/actions)
+[![Build Status](https://github.com/ankane/archer/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/archer/actions)
 
 ## Installation
 
