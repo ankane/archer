@@ -4,6 +4,6 @@ gemspec
 
 gem "rake"
 gem "minitest"
-gem "sqlite3", "< 2"
+gem "sqlite3"
 gem "combustion"
-gem "rails", "~> 7.1.0"
+gem "rails", "~> 7.2.0"
