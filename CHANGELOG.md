@@ -1,3 +1,7 @@
+## 1.1.0 (unreleased)
+
+- Dropped support for Ruby < 3.1 and Rails < 7
+
 ## 1.0.0 (2024-01-10)
 
 - Added support for multi-line commands
