@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "railties", ">= 7"
   spec.add_dependency "activerecord", ">= 7"
+  spec.add_dependency "irb"
 end
