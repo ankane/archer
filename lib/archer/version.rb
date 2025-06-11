@@ -1,3 +1,3 @@
 module Archer
-  VERSION = "0.4.1"
+  VERSION = "1.2.0"
 end

@@ -1,7 +1,11 @@
 # dependencies
 require "active_support/core_ext/module/attribute_accessors"
 
+# stdlib
+require "json"
+
 # modules
+require_relative "archer/coder"
 require_relative "archer/engine" if defined?(Rails)
 require_relative "archer/irb"
 require_relative "archer/version"
@@ -38,7 +42,7 @@ module Archer
       end
 
       if history
-        commands = history.commands.split("\n")
+        commands = history.commands
         history_object.clear
         history_object.push(*commands)
       end
@@ -48,6 +52,9 @@ module Archer
       Archer.exit_callbacks.each do |cb|
         IRB.conf[:AT_EXIT].push(cb)
       end
+    rescue
+      # never prevent console from booting
+      warn "[archer] Error loading history"
     end
 
     def add_exit_callback fn
@@ -63,7 +70,7 @@ module Archer
 
       quietly do
         history = Archer::History.where(user: user).first_or_initialize
-        history.commands = history_object.to_a.last(limit).join("\n")
+        history.commands = history_object.to_a.last(limit)
         history.save!
       end
     rescue ActiveRecord::StatementInvalid

@@ -1,3 +1,21 @@
+## 1.2.0 (2025-05-04)
+
+- Dropped support for Ruby < 3.2 and Rails < 7.1
+
+## 1.1.0 (2025-02-01)
+
+- Dropped support for Ruby < 3.1 and Rails < 7
+
+## 1.0.0 (2024-01-10)
+
+- Added support for multi-line commands
+- Changed command serialization to JSON
+- Dropped support for Ruby < 3 and Rails < 6.1
+
+## 0.4.1 (2023-10-31)
+
+- Fixed error with Rails 7.1
+
 ## 0.4.0 (2023-02-06)
 
 - Fixed error with irb 1.4.2+
