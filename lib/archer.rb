@@ -25,7 +25,7 @@ module Archer
 
   class << self
     def start
-      if !history_object
+      if !history
         warn "[archer] Skipping history"
         return
       end
@@ -38,8 +38,8 @@ module Archer
       end
 
       if commands
-        history_object.clear
-        history_object.push(*commands)
+        history.clear
+        history.push(*commands)
       end
 
       IRB.conf[:AT_EXIT].push(proc { Archer.save if Archer.save_session })
@@ -49,9 +49,9 @@ module Archer
     end
 
     def save
-      return false unless history_object
+      return false unless history
 
-      commands = history_object.to_a.last(limit)
+      commands = history.to_a.last(limit)
       storage.save(commands, user: user)
     rescue
       warn "[archer] Unable to save history"
@@ -60,13 +60,13 @@ module Archer
 
     def clear
       storage.clear(user: user)
-      history_object.clear if history_object
+      history.clear if history
       true
     end
 
     private
 
-    def history_object
+    def history
       cls = IRB.CurrentContext&.io&.class
       cls && cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
     end
