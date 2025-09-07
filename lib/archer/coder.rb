@@ -1,3 +1,5 @@
+require "json"
+
 module Archer
   module Coder
     def self.dump(value)

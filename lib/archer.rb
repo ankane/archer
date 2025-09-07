@@ -1,16 +1,14 @@
 # dependencies
 require "active_support/core_ext/module/attribute_accessors"
 
-# stdlib
-require "json"
-
 # modules
-require_relative "archer/coder"
+require_relative "archer/adapter"
 require_relative "archer/engine" if defined?(Rails)
 require_relative "archer/irb"
 require_relative "archer/version"
 
 module Archer
+  autoload :Coder, "archer/coder"
   autoload :History, "archer/history"
 
   mattr_accessor :limit
@@ -22,6 +20,9 @@ module Archer
   mattr_accessor :save_session
   self.save_session = true
 
+  # experimental
+  mattr_accessor(:adapter) { Adapter.new }
+
   class << self
     def start
       if !history_object
@@ -29,17 +30,14 @@ module Archer
         return
       end
 
-      history = nil
+      commands = nil
       begin
-        quietly do
-          history = Archer::History.find_by(user: user)
-        end
-      rescue ActiveRecord::StatementInvalid
-        warn "[archer] Create table to enable history"
+        commands = adapter.load(user: user)
+      rescue => e
+        warn "[archer] #{e.message}"
       end
 
-      if history
-        commands = history.commands
+      if commands
         history_object.clear
         history_object.push(*commands)
       end
@@ -53,20 +51,15 @@ module Archer
     def save
       return false unless history_object
 
-      quietly do
-        history = Archer::History.where(user: user).first_or_initialize
-        history.commands = history_object.to_a.last(limit)
-        history.save!
-      end
-    rescue ActiveRecord::StatementInvalid
+      commands = history_object.to_a.last(limit)
+      adapter.save(commands, user: user)
+    rescue
       warn "[archer] Unable to save history"
       false
     end
 
     def clear
-      quietly do
-        Archer::History.where(user: user).delete_all
-      end
+      adapter.clear(user: user)
       history_object.clear if history_object
       true
     end
@@ -76,12 +69,6 @@ module Archer
     def history_object
       cls = IRB.CurrentContext&.io&.class
       cls && cls.const_defined?(:HISTORY) ? cls::HISTORY : nil
-    end
-
-    def quietly
-      ActiveRecord::Base.logger.silence do
-        yield
-      end
     end
   end
 end
