@@ -2,9 +2,9 @@
 require "active_support/core_ext/module/attribute_accessors"
 
 # modules
-require_relative "archer/adapter"
 require_relative "archer/engine" if defined?(Rails)
 require_relative "archer/irb"
+require_relative "archer/storage"
 require_relative "archer/version"
 
 module Archer
@@ -21,7 +21,7 @@ module Archer
   self.save_session = true
 
   # experimental
-  mattr_accessor(:adapter) { Adapter.new }
+  mattr_accessor(:storage) { Storage.new }
 
   class << self
     def start
@@ -32,7 +32,7 @@ module Archer
 
       commands = nil
       begin
-        commands = adapter.load(user: user)
+        commands = storage.load(user: user)
       rescue => e
         warn "[archer] #{e.message}"
       end
@@ -52,14 +52,14 @@ module Archer
       return false unless history_object
 
       commands = history_object.to_a.last(limit)
-      adapter.save(commands, user: user)
+      storage.save(commands, user: user)
     rescue
       warn "[archer] Unable to save history"
       false
     end
 
     def clear
-      adapter.clear(user: user)
+      storage.clear(user: user)
       history_object.clear if history_object
       true
     end

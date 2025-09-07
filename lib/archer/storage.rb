@@ -1,5 +1,5 @@
 module Archer
-  class Adapter
+  class Storage
     def load(user:)
       quietly do
         Archer::History.find_by(user: user)&.commands
