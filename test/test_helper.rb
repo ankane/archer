@@ -23,3 +23,4 @@ IRB.setup(nil, argv: [])
 
 # run console hooks
 Rails::Console.new(Rails.application)
+Rails.logger.stop_broadcasting_to(Rails.logger.broadcasts.last)
