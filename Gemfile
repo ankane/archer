@@ -4,6 +4,7 @@ gemspec
 
 gem "rake"
 gem "minitest"
+gem "minitest-mock"
 gem "sqlite3", platform: :ruby
 gem "sqlite3-ffi", platform: :jruby
 gem "combustion"
