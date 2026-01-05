@@ -6,7 +6,7 @@ class ArcherTest < Minitest::Test
   end
 
   def test_tty
-    STDIN.stub(:tty?, true) { setup_irb }
+    stub_method(STDIN, :tty?, true) { setup_irb }
 
     assert_equal true, Archer.clear
 
@@ -23,7 +23,7 @@ class ArcherTest < Minitest::Test
   end
 
   def test_non_tty
-    STDIN.stub(:tty?, false) { setup_irb }
+    stub_method(STDIN, :tty?, false) { setup_irb }
 
     assert_equal true, Archer.clear
 
@@ -49,6 +49,18 @@ class ArcherTest < Minitest::Test
     # TODO use IRB
     commands.each do |cmd|
       Archer.send(:history).push(cmd) if Archer.send(:history)
+    end
+  end
+
+  def stub_method(cls, method, code)
+    original_code = cls.method(method)
+    begin
+      cls.singleton_class.undef_method(method)
+      cls.define_singleton_method(method, code.respond_to?(:call) ? code : ->(*) { code })
+      yield
+    ensure
+      cls.singleton_class.undef_method(method) if cls.singleton_class.method_defined?(method)
+      cls.define_singleton_method(method, original_code)
     end
   end
 end
