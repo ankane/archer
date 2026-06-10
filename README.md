@@ -101,7 +101,11 @@ alias hc="heroku run USER=andrew rails console"
 
 ### Dokku
 
-There’s no way to specify a user at the moment.
+For user-specific history, the command should follow this format:
+
+```sh
+dokku run env USER=andrew rails console
+```
 
 ## History
 
