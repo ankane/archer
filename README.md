@@ -107,6 +107,12 @@ For user-specific history, the command should follow this format:
 dokku run env USER=andrew rails console
 ```
 
+Set up an [alias](https://shapeshed.com/unix-alias/) to save yourself some typing
+
+```sh
+alias dc="dokku run env USER=andrew rails console"
+```
+
 ## History
 
 View the [changelog](https://github.com/ankane/archer/blob/master/CHANGELOG.md)
