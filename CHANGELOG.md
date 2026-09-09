@@ -1,4 +1,4 @@
-## 1.3.1 (unreleased)
+## 1.3.1 (2026-09-09)
 
 - Added support for json 3
 
