@@ -7,7 +7,7 @@ module Archer
     end
 
     def self.load(value)
-      JSON.parse(value, {max_nesting: 1}) unless value.nil?
+      JSON.parse(value, max_nesting: 1) unless value.nil?
     rescue JSON::ParserError
       # previous format
       value.split("\n")
